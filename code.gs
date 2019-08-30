@@ -50,6 +50,14 @@ function checkJOBCAN() {
         checkSheet.appendRow([date, resSection, name]);
       }; 
     };
+  };  
+  for (l = 2;l<=lastRow;l++){
+    var strDate = sheet.getRange(l,1).getValue();
+    sheet.getRange(l, 4).setNumberFormat("yyyy/mm/dd");
+    sheet.getRange(l, 4).setFormula("=DATEVALUE(\"2019/\"&REGEXREPLACE(\""+ strDate +"\",\"\\\(.*?\\\)\",\"\"))");
   };
+  sheet.deleteColumn(1);
+  var columnSpec = sheet.getRange(lastRow, 3);
+  sheet.moveColumns(columnSpec, 1);
 };
 
